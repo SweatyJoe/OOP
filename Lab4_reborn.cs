@@ -15,13 +15,17 @@ namespace Lab2
 
             B ObjectArray = new B(value, 9.92f); //конструктор с массивом
             foreach (var i in ObjectArray.array1) Console.WriteLine(i + "\t");
+            
+            Console.WriteLine("\t Задание из 4 лабораторной: \t");
+            B Ind = new B();
+            for (int i = 0; i < 10; i++) Console.WriteLine("[{0}] {1}",i+1, Ind[i]);
+            Console.WriteLine("");
+            for (int i = 0; i < 10; i++) Console.WriteLine("[{0}] {1}",i+1, Ind[(short)i]);
 
-            Console.WriteLine();
-            B ObjectInd = new B(10);
-            for(int i = 0; i < ObjectInd.Length; i++)
-            {
-                ObjectInd[i] = Convert.ToInt32(Console.ReadLine());
-            }
+            C<string>.F = "string";
+            C<int>.F = 1010101010;
+
+            Console.WriteLine("текст:{0}; число:{1}.", C<string>.F, C<int>.F);
         }
     }
 
@@ -49,14 +53,22 @@ namespace Lab2
             a = this.a;
         }
     }
-
+    class C<T>
+    {
+        public static T F;  //статическое поле
+    }
     public class B : A
     {
         private int a, b;
         private float d;
         public float[] array1;
-        int[] arr;
+        int[] arr = new int[] { 1, 7, 17, 77, 117, 177, 777, 1117, 1177, 1777 };
+        int[] arr1;
         public int Length;
+        public B()
+        {
+            arr1 = new int[] { 2, 29, 99, 229, 299, 999, 2229, 2299, 2999, 9999 };
+        }
 
         public B(int a, int b, float d) : base(a, b)  //наследуемый конструктор
         {
@@ -91,16 +103,16 @@ namespace Lab2
             }
         }
 
-        public int this[int index]
+        public int this[int index]  //индексатор 1
         {
             set { arr[index] = value; }
             get { return arr[index]; }
         }
-        public Index(int size)
+        public int this[short index1]  //индексатор 2  //вместо int приходится использовать short
         {
-            arr = new int[size];
-            Length = size;
+            get { return arr1[index1]; }
+            set { arr1[index1] = value; }
         }
-
     }
 }
+//много кода, что бы сложнее было копипастить))"безопасность"
